@@ -8,7 +8,7 @@ public class PointTests {
 
 
   @Test
-  public void testArea(){
+  public void testDistance(){
     Point p1 = new Point(2,7);
     Point p2 = new Point(-2,7);
     Point p3 = new Point(-5,1);
