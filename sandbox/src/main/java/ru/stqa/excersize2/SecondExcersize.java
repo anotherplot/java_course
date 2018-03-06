@@ -14,9 +14,9 @@ public class SecondExcersize {
     Point p6 = new Point(8.0, 22.0);
 
 
-    System.out.println("Расстояние между точкой p1" + p1 + " и точкой p2" + p2 + " = " + Point.distance(p1, p2));
-    System.out.println("Расстояние между точкой p3" + p3 + " и точкой p4" + p4 + " = " + Point.distance(p3, p4));
-    System.out.println("Расстояние между точкой p5" + p5 + " и точкой p6" + p6 + " = " + Point.distance(p5, p6));
+    System.out.println("Расстояние между точкой p1" + p1 + " и точкой p2" + p2 + " = " + p1.distance(p2));
+    System.out.println("Расстояние между точкой p3" + p3 + " и точкой p4" + p4 + " = " + p3.distance(p4));
+    System.out.println("Расстояние между точкой p5" + p5 + " и точкой p6" + p6 + " = " + p5.distance(p6));
 
 
   }
