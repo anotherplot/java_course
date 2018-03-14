@@ -1,3 +1,5 @@
+package ru.stqa.pft.addressbook;
+
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
@@ -7,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
+import ru.stqa.pft.addressbook.ContactData;
 
 public class ContactCreateTest {
     FirefoxDriver wd;
@@ -33,7 +36,7 @@ public class ContactCreateTest {
     public void contactCreationTest() {
 
         initContactCreation();
-        fillContactForm();
+        fillContactForm(new ContactData("Olga", "Igorevna", "Mezhova", "8001102020", "8556006060", "mail1@test.ru", "mail2@test.ru", "mail3@test.ru"));
         submitContactCreation();
         returnToHomePage();
     }
@@ -46,37 +49,33 @@ public class ContactCreateTest {
         wd.findElement(By.name("submit")).click();
     }
 
-    private void fillContactForm() {
+    private void fillContactForm(ContactData contactData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys("Olga");
+        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
         wd.findElement(By.name("middlename")).click();
         wd.findElement(By.name("middlename")).click();
         wd.findElement(By.name("middlename")).clear();
-        wd.findElement(By.name("middlename")).sendKeys("Igorevna");
+        wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddlename());
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).click();
         wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys("Mezhova");
+        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
         wd.findElement(By.name("home")).click();
         wd.findElement(By.name("home")).clear();
-        wd.findElement(By.name("home")).sendKeys("8001102020");
+        wd.findElement(By.name("home")).sendKeys(contactData.getHomephone());
         wd.findElement(By.name("work")).click();
         wd.findElement(By.name("work")).clear();
-        wd.findElement(By.name("work")).sendKeys("8556006060");
+        wd.findElement(By.name("work")).sendKeys(contactData.getWorkphone());
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
-        wd.findElement(By.name("email")).sendKeys("mail1@test.ru");
-        wd.findElement(By.name("theform")).click();
+        wd.findElement(By.name("email")).sendKeys(contactData.getFirstmail());
         wd.findElement(By.name("email2")).click();
         wd.findElement(By.name("email2")).clear();
-        wd.findElement(By.name("email2")).sendKeys("mail@test.ru");
-        wd.findElement(By.name("email2")).click();
-        wd.findElement(By.name("email2")).clear();
-        wd.findElement(By.name("email2")).sendKeys("mail@test.ru");
+        wd.findElement(By.name("email2")).sendKeys(contactData.getSecondmail());
         wd.findElement(By.name("email3")).click();
         wd.findElement(By.name("email3")).clear();
-        wd.findElement(By.name("email3")).sendKeys("mail3@test.ru");
+        wd.findElement(By.name("email3")).sendKeys(contactData.getThirdmail());
     }
 
     private void initContactCreation() {
