@@ -16,7 +16,6 @@ public class GroupCreateTest {
   @BeforeMethod
   public void setUp() throws Exception {
     wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-    //wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/Applications/Firefox.app/Contents/MacOS/firefox"));
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
     login("admin", "secret");
