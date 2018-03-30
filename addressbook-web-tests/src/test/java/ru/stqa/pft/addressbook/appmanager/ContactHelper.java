@@ -51,12 +51,12 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void selectContact() {
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void initContactModification() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  public void initContactModification(int index) {
+    wd.findElements(By.xpath("//td[@class='center']/a/img[@alt='Edit']")).get(index).click();
   }
 
   public void submitContactModification() {
@@ -91,8 +91,6 @@ public class ContactHelper extends HelperBase {
       String name = element.findElement(By.xpath("td[3]")).getText();
       ContactData contact = new ContactData(name, null, surname, null, null, null, null, null, null);
       contacts.add(contact);
-      System.out.println(contact);
-
     }
     return contacts;
   }
