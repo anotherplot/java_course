@@ -13,7 +13,7 @@ public class ContactModificateTest extends TestBase {
   @Test (enabled = false)
   public void testContactModification() {
 
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     if (!app.getContactHelper().isThereContact()) {
       app.getContactHelper().createContact(new ContactData("Olga", "Igorevna", "Mezhova", "8001102020", "8556006060", "mail1@test.ru", "mail2@test.ru", "mail3@test.ru", "test1"));
     }
@@ -22,7 +22,7 @@ public class ContactModificateTest extends TestBase {
     ContactData contact = new ContactData("newname", "newmiddle", "newlast", "9991112233", "7998887766", "new1@mail.ru", "new2@mail.ru", "new3@mail.ru", null);
     app.getContactHelper().fillContactForm(contact, false);
     app.getContactHelper().submitContactModification();
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size());
 
