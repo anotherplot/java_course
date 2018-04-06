@@ -29,7 +29,7 @@ public class ContactModificateTest extends TestBase {
     before.remove(before.size()-1);
     before.add(contact);
 
-    Comparator<? super ContactData> byName = (c1, c2) -> c1.getFirstname().compareTo(c2.getFirstname());
+    Comparator<? super ContactData> byName = (c1, c2) -> Integer.compare(c1.getId(),c2.getId());
     before.sort(byName);
     after.sort(byName);
     Assert.assertEquals(before,after);
