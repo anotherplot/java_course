@@ -9,8 +9,6 @@ public class GroupData {
   private String footer;
 
 
-
-
   public String getName() {
     return name;
   }
