@@ -99,6 +99,20 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
+    public void gotoHomePage() {
 
+        if (isElementPresent(By.id("maintable"))) {
+            return;
+        }
 
+        click(By.linkText("home"));
+    }
+
+    public void delete(ContactData contact) {
+      selectContactById(contact.getId());
+      initContactDeletion();
+      submitContactDeletion();
+      gotoHomePage();
+
+    }
 }
