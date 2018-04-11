@@ -131,4 +131,16 @@ public class ContactHelper extends HelperBase {
         gotoHomePage();
 
     }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModification(contact.getId());
+        String fisrtname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String middlename = wd.findElement(By.name("middlename")).getAttribute("value");
+        String firstmail = wd.findElement(By.name("email")).getAttribute("value");
+        String homephone = wd.findElement(By.name("home")).getAttribute("value");
+        String workpphone = wd.findElement(By.name("work")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData().withId(contact.getId()).withFirstName(fisrtname).withLastName(lastname).withMiddleName(middlename).withFisrtMail(firstmail).withHomePhone(homephone).withWorkPhone(workpphone);
+    }
 }

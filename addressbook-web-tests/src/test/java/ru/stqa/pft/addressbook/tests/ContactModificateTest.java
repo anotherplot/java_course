@@ -18,7 +18,7 @@ public class ContactModificateTest extends TestBase {
   public void ensurePreconditions() {
     app.goTo().gotoHomePage();
     if (! app.contact().isThereContact()) {
-      app.contact().create(new ContactData().withFirstName("Olha").withLastName("Mezhova").withMiddleName("Igorevna").withFisrtMail("mail1").withHomePhone("homephone").withGroup("test1"));
+      app.contact().create(new ContactData().withFirstName("Olha").withLastName("Mezhova").withMiddleName("Igorevna").withFisrtMail("mail1").withHomePhone("900").withWorkPhone("333").withGroup("test1"));
     }
   }
 
