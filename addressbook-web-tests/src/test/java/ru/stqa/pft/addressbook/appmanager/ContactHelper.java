@@ -13,90 +13,96 @@ import java.util.List;
 public class ContactHelper extends HelperBase {
 
 
-  public ContactHelper(WebDriver wd) {
-    super(wd);
-  }
-
-  public void submitContactCreation() {
-    click(By.name("submit"));
-  }
-
-  public void returnToHomePage() {
-    click(By.linkText("home page"));
-  }
-
-  public void fillContactForm(ContactData contactData, boolean creation) {
-    type(By.name("firstname"), contactData.getFirstname());
-    type(By.name("middlename"), contactData.getMiddlename());
-    type(By.name("lastname"), contactData.getLastname());
-    type(By.name("home"), contactData.getHomephone());
-    type(By.name("work"), contactData.getWorkphone());
-    type(By.name("email"), contactData.getFirstmail());
-    type(By.name("email2"), contactData.getSecondmail());
-    type(By.name("email3"), contactData.getThirdmail());
-
-    if (creation) {
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    public ContactHelper(WebDriver wd) {
+        super(wd);
     }
 
-  }
+    public void submitContactCreation() {
+        click(By.name("submit"));
+    }
 
-  public void initContactCreation() {
-    click(By.linkText("add new"));
-  }
+    public void returnToHomePage() {
+        click(By.linkText("home page"));
+    }
 
+    public void fillContactForm(ContactData contactData, boolean creation) {
+        type(By.name("firstname"), contactData.getFirstname());
+        type(By.name("middlename"), contactData.getMiddlename());
+        type(By.name("lastname"), contactData.getLastname());
+        type(By.name("home"), contactData.getHomephone());
+        type(By.name("work"), contactData.getWorkphone());
+        type(By.name("email"), contactData.getFirstmail());
+        type(By.name("email2"), contactData.getSecondmail());
+        type(By.name("email3"), contactData.getThirdmail());
 
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
-  }
-
-  public void selectContactById(int id) {
-    wd.findElement(By.cssSelector("input[value = '" +  id + "']")).click();
-  }
-
-  public void initContactModification(int id) {
-    click(By.xpath("//input[@value="+id+"]/../following-sibling::*[7]/a/img[@alt='Edit']"));
-  }
-
-  public void submitContactModification() {
-    click(By.name("update"));
-  }
-
-  public void initContactDeletion() {
-    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
-  }
-
-  public void submitContactDeletion() {
-    wd.switchTo().alert().accept();
-  }
-
-  public void create(ContactData contact) {
-    initContactCreation();
-    fillContactForm(contact, true);
-    submitContactCreation();
-    returnToHomePage();
-  }
-
-  public boolean isThereContact() {
-    return isElementPresent( By.name("selected[]"));
-  }
-
-  public Contacts all() {
-    Contacts contacts = new Contacts();
-    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
-    int k=0;
-    for (WebElement element : elements) {
-      String surname = element.findElement(By.xpath("td[2]")).getText();
-      String name = element.findElement(By.xpath("td[3]")).getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      ContactData c = new ContactData().withId(id).withFirstName(name).withLastName(surname);
-      contacts.add(c);
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
 
     }
-    return contacts;
-  }
+
+    public void initContactCreation() {
+        click(By.linkText("add new"));
+    }
+
+
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value = '" + id + "']")).click();
+    }
+
+    public void initContactModification(int id) {
+        click(By.xpath("//input[@value=" + id + "]/../following-sibling::*[7]/a/img[@alt='Edit']"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    public void initContactDeletion() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    }
+
+    public void submitContactDeletion() {
+        wd.switchTo().alert().accept();
+    }
+
+    public void create(ContactData contact) {
+        initContactCreation();
+        fillContactForm(contact, true);
+        submitContactCreation();
+        contactCash = null;
+        returnToHomePage();
+    }
+
+    public boolean isThereContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    private Contacts contactCash = null;
+
+    public Contacts all() {
+        if (contactCash != null) {
+            return new Contacts(contactCash);
+        }
+        contactCash = new Contacts();
+        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
+        int k = 0;
+        for (WebElement element : elements) {
+            String surname = element.findElement(By.xpath("td[2]")).getText();
+            String name = element.findElement(By.xpath("td[3]")).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData c = new ContactData().withId(id).withFirstName(name).withLastName(surname);
+            contactCash.add(c);
+
+        }
+        return contactCash;
+    }
 
     public void gotoHomePage() {
 
@@ -108,10 +114,11 @@ public class ContactHelper extends HelperBase {
     }
 
     public void delete(ContactData contact) {
-      selectContactById(contact.getId());
-      initContactDeletion();
-      submitContactDeletion();
-      gotoHomePage();
+        selectContactById(contact.getId());
+        initContactDeletion();
+        submitContactDeletion();
+        contactCash = null;
+        gotoHomePage();
 
     }
 
@@ -120,6 +127,7 @@ public class ContactHelper extends HelperBase {
         initContactModification(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
+        contactCash = null;
         gotoHomePage();
 
     }
