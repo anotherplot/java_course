@@ -57,7 +57,13 @@ public class ContactHelper extends HelperBase {
     }
 
     public void initContactModification(int id) {
-        click(By.xpath("//input[@value=" + id + "]/../following-sibling::*[7]/a/img[@alt='Edit']"));
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(7).findElement(By.tagName("a")).click();
+
+
+        //click(By.xpath("//input[@value=" + id + "]/../following-sibling::*[7]/a/img[@alt='Edit']"));
     }
 
     public void submitContactModification() {
@@ -99,6 +105,7 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             ContactData c = new ContactData().withId(id).withFirstName(name).withLastName(surname);
             contactCash.add(c);
+
 
         }
         return contactCash;
