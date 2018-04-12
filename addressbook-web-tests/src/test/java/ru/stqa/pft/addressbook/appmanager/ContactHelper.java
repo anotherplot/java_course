@@ -98,13 +98,17 @@ public class ContactHelper extends HelperBase {
             return new Contacts(contactCash);
         }
         contactCash = new Contacts();
-        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
-        int k = 0;
-        for (WebElement element : elements) {
-            String surname = element.findElement(By.xpath("td[2]")).getText();
-            String name = element.findElement(By.xpath("td[3]")).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData c = new ContactData().withId(id).withFirstName(name).withLastName(surname);
+        List<WebElement> rows = wd.findElements(By.name("entry"));
+        //List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            String surname = cells.get(1).getText();
+            String name = cells.get(2).getText();
+            String[] phones = cells.get(5).getText().split("\n");
+            System.out.println(phones+"-----");
+            ContactData c = new ContactData().withId(id).withFirstName(name).withLastName(surname).
+                    withHomePhone(phones[0]).withMobilephone(phones[1]).withWorkPhone(phones[2]);
             contactCash.add(c);
 
 
@@ -148,7 +152,10 @@ public class ContactHelper extends HelperBase {
         String firstmail = wd.findElement(By.name("email")).getAttribute("value");
         String homephone = wd.findElement(By.name("home")).getAttribute("value");
         String workpphone = wd.findElement(By.name("work")).getAttribute("value");
+        String mobilephone = wd.findElement(By.name("mobile")).getAttribute("value");
+        System.out.println(mobilephone);
         wd.navigate().back();
-        return new ContactData().withId(contact.getId()).withFirstName(fisrtname).withLastName(lastname).withMiddleName(middlename).withFisrtMail(firstmail).withHomePhone(homephone).withWorkPhone(workpphone);
+        return new ContactData().withId(contact.getId()).withFirstName(fisrtname).withLastName(lastname).withMiddleName(middlename).withFisrtMail(firstmail).
+                withHomePhone(homephone).withWorkPhone(workpphone).withMobilephone(mobilephone);
     }
 }
