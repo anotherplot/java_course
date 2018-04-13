@@ -103,12 +103,12 @@ public class ContactHelper extends HelperBase {
         for (WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+
+
             String surname = cells.get(1).getText();
             String name = cells.get(2).getText();
-            String[] phones = cells.get(5).getText().split("\n");
-            System.out.println(phones+"-----");
-            ContactData c = new ContactData().withId(id).withFirstName(name).withLastName(surname).
-                    withHomePhone(phones[0]).withMobilephone(phones[1]).withWorkPhone(phones[2]);
+            String allPhones = cells.get(5).getText();
+            ContactData c = new ContactData().withId(id).withFirstName(name).withLastName(surname).withAllphones(allPhones);
             contactCash.add(c);
 
 

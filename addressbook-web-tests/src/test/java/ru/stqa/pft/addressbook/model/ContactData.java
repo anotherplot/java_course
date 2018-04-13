@@ -15,6 +15,18 @@ public class ContactData {
   private String group;
   private int id = Integer.MAX_VALUE;
 
+  public String getAllphones() {
+    return allphones;
+  }
+
+  public ContactData withAllphones(String allphones) {
+    this.allphones = allphones;
+    return this;
+
+  }
+
+  private String allphones;
+
 
   public String getFirstname() {
     return firstname;
