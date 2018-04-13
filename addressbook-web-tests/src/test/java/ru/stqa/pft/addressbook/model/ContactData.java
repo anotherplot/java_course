@@ -14,6 +14,8 @@ public class ContactData {
   private String thirdmail;
   private String group;
   private int id = Integer.MAX_VALUE;
+  private String allphones;
+  private String allMails;
 
   public String getAllphones() {
     return allphones;
@@ -25,7 +27,15 @@ public class ContactData {
 
   }
 
-  private String allphones;
+    public String getAllMails() {
+        return allMails;
+    }
+
+    public ContactData withAllMails(String allMails) {
+        this.allMails = allMails;
+        return this;
+
+    }
 
 
   public String getFirstname() {
