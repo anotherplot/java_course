@@ -16,7 +16,8 @@ public class ContactPhoneTests extends TestBase {
     public void ensurePreconditions() {
         app.goTo().gotoHomePage();
         if (! app.contact().isThereContact()) {
-            app.contact().create(new ContactData().withFirstName("Olha").withLastName("Mezhova").withMiddleName("Igorevna").withFisrtMail("mail1").withHomePhone("homephone").withGroup("test1"));
+            app.contact().create(new ContactData().withFirstName("Olha").withLastName("Mezhova").withMiddleName("Igorevna")
+                    .withHomePhone("+7(900)222333444").withMobilephone("33 33 22").withWorkPhone("908844474").withGroup("test1"));
         }
     }
 

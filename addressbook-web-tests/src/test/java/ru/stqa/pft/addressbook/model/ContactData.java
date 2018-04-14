@@ -16,6 +16,19 @@ public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String allphones;
   private String allMails;
+  private String address;
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+
 
   public String getAllphones() {
     return allphones;
