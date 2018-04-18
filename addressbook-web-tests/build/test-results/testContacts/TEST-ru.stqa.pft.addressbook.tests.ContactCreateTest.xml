@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ru.stqa.pft.addressbook.tests.ContactCreateTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-04-18T21:26:25" hostname="MacBook-Pro-Denis.local" time="9.8">
+  <properties/>
+  <testcase name="contactCreationTest[0](ContactData{id='2147483647'firstname='first name 0', middlename='middle name 0', lastname='last name 0', homephone='null', workphone='+79001111110', firstmail='first mail 0', secondmail='null', thirdmail='null', group='test 1'})" classname="ru.stqa.pft.addressbook.tests.ContactCreateTest" time="4.055"/>
+  <testcase name="contactCreationTest[1](ContactData{id='2147483647'firstname='first name 1', middlename='middle name 1', lastname='last name 1', homephone='null', workphone='+79001111111', firstmail='first mail 1', secondmail='null', thirdmail='null', group='test 1'})" classname="ru.stqa.pft.addressbook.tests.ContactCreateTest" time="2.725"/>
+  <testcase name="contactCreationTest[2](ContactData{id='2147483647'firstname='first name 2', middlename='middle name 2', lastname='last name 2', homephone='null', workphone='+79001111112', firstmail='first mail 2', secondmail='null', thirdmail='null', group='test 1'})" classname="ru.stqa.pft.addressbook.tests.ContactCreateTest" time="3.02"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
