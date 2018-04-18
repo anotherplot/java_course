@@ -1,0 +1,23 @@
+[
+  {
+    "firstname": "first name 0",
+    "middlename": "middle name 0",
+    "lastname": "last name 0",
+    "workphone": "+79001111110",
+    "firstmail": "first mail 0"
+  },
+  {
+    "firstname": "first name 1",
+    "middlename": "middle name 1",
+    "lastname": "last name 1",
+    "workphone": "+79001111111",
+    "firstmail": "first mail 1"
+  },
+  {
+    "firstname": "first name 2",
+    "middlename": "middle name 2",
+    "lastname": "last name 2",
+    "workphone": "+79001111112",
+    "firstmail": "first mail 2"
+  }
+]
