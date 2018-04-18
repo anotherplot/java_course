@@ -26,6 +26,8 @@ public class ContactData {
   private String thirdmail;
   @Expose
   private String group;
+  @Expose
+  private File photo;
   private int id = Integer.MAX_VALUE;
   private String allphones;
   private String allMails;
@@ -40,7 +42,6 @@ public class ContactData {
         return this;
     }
 
-    private File photo;
 
 
     public String getAddress() {
