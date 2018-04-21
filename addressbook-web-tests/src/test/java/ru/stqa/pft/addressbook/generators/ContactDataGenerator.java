@@ -53,12 +53,11 @@ public class ContactDataGenerator {
 
     private List<ContactData> generateContacts(int count) throws IOException {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        File photo = new File("src/test/resources/photo.png");
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstName(String.format("first name %s",i))
-                    .withFirstName(String.format("first name %s",i)).withFirstName(String.format("first name %s",i)).withLastName(String.format("last name %s",i))
-                    .withMiddleName(String.format("middle name %s",i)).withFisrtMail(String.format("first mail %s",i))
-                    .withWorkPhone(String.format("+7900111111%s",i)).withGroup(String.format("test 1")));
+                    .withFirstName(String.format("first name %s",i)).withMiddleName(String.format("middle name %s",i)).withLastName(String.format("last name %s",i))
+                    .withFisrtMail(String.format("mail %s",i)).withSecondMail(String.format("mail2 %s",i)).withThirdMail(String.format("mail3 %s",i))
+                    .withHomePhone(String.format("900555555%s",i)).withMobilephone(String.format("888000000 %s",i)).withWorkPhone(String.format("9330009988%s",i)).withGroup("test1"));
 
         }
         return contacts;

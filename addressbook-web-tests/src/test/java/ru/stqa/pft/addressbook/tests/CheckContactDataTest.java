@@ -16,7 +16,7 @@ public class CheckContactDataTest extends TestBase{
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().gotoHomePage();
+        app.goTo().homePage();
         if (! app.contact().isThereContact()) {
             app.contact().create(new ContactData().withFirstName("Olha").withLastName("Mezhova").withMiddleName("Igorevna")
                     .withHomePhone("+7(900)222333444").withMobilephone("33 33 22").withWorkPhone("908844474")
@@ -27,7 +27,7 @@ public class CheckContactDataTest extends TestBase{
 
     @Test
     public void testContactData() {
-        app.goTo().gotoHomePage();
+        app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 

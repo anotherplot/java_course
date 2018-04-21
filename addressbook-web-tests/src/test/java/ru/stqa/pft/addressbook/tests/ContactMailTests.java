@@ -15,7 +15,7 @@ public class ContactMailTests extends TestBase{
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().gotoHomePage();
+        app.goTo().homePage();
         if (! app.contact().isThereContact()) {
             app.contact().create(new ContactData().withFirstName("Olha").withLastName("Mezhova").withMiddleName("Igorevna")
                    .withFisrtMail("mail1@tes.tt").withSecondMail("mail2@tes.tt").withThirdMail("mail3@tes.tt").withGroup("test1"));
@@ -24,7 +24,7 @@ public class ContactMailTests extends TestBase{
 
     @Test
     public void testContactPhones() {
-        app.goTo().gotoHomePage();
+        app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
         assertThat(contact.getAllMails(), equalTo(mergeMails(contactInfoFromEditForm)));

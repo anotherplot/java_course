@@ -74,7 +74,7 @@ public class ContactData {
   @Type(type = "text")
   private String address;
 
-    public File getPhoto() {
+  public File getPhoto() {
         return new File(photo);
     }
 
@@ -157,23 +157,10 @@ public class ContactData {
     return group;
   }
 
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id &&
-            Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
+  public int getId() {
+    return id;
   }
 
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(firstname, lastname, id);
-  }
 
   @Override
   public String toString() {
@@ -248,9 +235,27 @@ public class ContactData {
     return this;
   }
 
-  public int getId() {
-    return id;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id &&
+            Objects.equals(firstname, that.firstname) &&
+            Objects.equals(middlename, that.middlename) &&
+            Objects.equals(lastname, that.lastname) &&
+            Objects.equals(homephone, that.homephone) &&
+            Objects.equals(mobilephone, that.mobilephone) &&
+            Objects.equals(workphone, that.workphone) &&
+            Objects.equals(firstmail, that.firstmail) &&
+            Objects.equals(secondmail, that.secondmail) &&
+            Objects.equals(thirdmail, that.thirdmail);
   }
 
+  @Override
+  public int hashCode() {
 
+    return Objects.hash(id, firstname, middlename, lastname, homephone, mobilephone, workphone, firstmail, secondmail, thirdmail);
+  }
 }

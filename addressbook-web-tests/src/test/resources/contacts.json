@@ -3,24 +3,24 @@
     "firstname": "first name 0",
     "middlename": "middle name 0",
     "lastname": "last name 0",
-    "workphone": "+79001111110",
-    "firstmail": "first mail 0",
-    "group": "test 1"
+    "homephone": "9005555550",
+    "mobilephone": "888000000 0",
+    "workphone": "93300099880",
+    "firstmail": "mail 0",
+    "secondmail": "mail2 0",
+    "thirdmail": "mail3 0",
+    "group": "test1"
   },
   {
     "firstname": "first name 1",
     "middlename": "middle name 1",
     "lastname": "last name 1",
-    "workphone": "+79001111111",
-    "firstmail": "first mail 1",
-    "group": "test 1"
-  },
-  {
-    "firstname": "first name 2",
-    "middlename": "middle name 2",
-    "lastname": "last name 2",
-    "workphone": "+79001111112",
-    "firstmail": "first mail 2",
-    "group": "test 1"
+    "homephone": "9005555551",
+    "mobilephone": "888000000 1",
+    "workphone": "93300099881",
+    "firstmail": "mail 1",
+    "secondmail": "mail2 1",
+    "thirdmail": "mail3 1",
+    "group": "test1"
   }
 ]
