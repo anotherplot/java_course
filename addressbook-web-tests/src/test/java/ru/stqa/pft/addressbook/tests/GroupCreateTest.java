@@ -12,7 +12,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -56,6 +58,7 @@ public class GroupCreateTest extends TestBase {
 
   @Test (dataProvider ="validGroupsFromJson")
   public void testGroupCreation(GroupData group) {
+
     app.goTo().groupPage();
     Groups before = app.group().all();
     app.group().create(group);
