@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class ContactHelper extends HelperBase {
         type(By.name("middlename"), contactData.getMiddlename());
         type(By.name("lastname"), contactData.getLastname());
         attach(By.name("photo"), contactData.getPhoto());
-
         type(By.name("home"), contactData.getHomephone());
         type(By.name("work"), contactData.getWorkphone());
         type(By.name("mobile"), contactData.getMobilephone());
@@ -39,9 +39,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("email3"), contactData.getThirdmail());
 
         if (creation) {
-            if (contactData.getGroups().size() > 0)
-            Assert.assertTrue(contactData.getGroups().size() == 1);
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -166,5 +167,11 @@ public class ContactHelper extends HelperBase {
                 withHomePhone(homephone).withWorkPhone(workpphone).withMobilephone(mobilephone)
                 .withFisrtMail(firstmail).withSecondMail(secondmail).withThirdMail(thirdmail)
                 .withAddress(address);
+    }
+
+    public void addGroupTo(ContactData contact, GroupData group) {
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+        click(By.name("add"));
+
     }
 }
