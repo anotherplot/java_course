@@ -57,7 +57,7 @@ public class ContactDataGenerator {
             contacts.add(new ContactData().withFirstName(String.format("first name %s",i))
                     .withFirstName(String.format("first name %s",i)).withMiddleName(String.format("middle name %s",i)).withLastName(String.format("last name %s",i))
                     .withFisrtMail(String.format("mail %s",i)).withSecondMail(String.format("mail2 %s",i)).withThirdMail(String.format("mail3 %s",i))
-                    .withHomePhone(String.format("900555555%s",i)).withMobilephone(String.format("888000000 %s",i)).withWorkPhone(String.format("9330009988%s",i)).withGroup("test1"));
+                    .withHomePhone(String.format("900555555%s",i)).withMobilephone(String.format("888000000 %s",i)).withWorkPhone(String.format("9330009988%s",i)));
 
         }
         return contacts;

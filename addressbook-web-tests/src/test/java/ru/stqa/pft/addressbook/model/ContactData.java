@@ -1,11 +1,14 @@
 package ru.stqa.pft.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -56,9 +59,6 @@ public class ContactData {
   @Type(type = "text")
   private String thirdmail;
 
-  @Expose
-  @Transient
-  private String group;
 
   @Expose
   @Column(name="photo")
@@ -74,6 +74,11 @@ public class ContactData {
   @Type(type = "text")
   private String address;
 
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name= "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
   public File getPhoto() {
         return new File(photo);
     }
@@ -82,7 +87,6 @@ public class ContactData {
         this.photo = photo.getPath();
         return this;
     }
-
 
 
     public String getAddress() {
@@ -153,8 +157,12 @@ public class ContactData {
     return thirdmail;
   }
 
-  public String getGroup() {
-    return group;
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
+  public void setGroups(Set<GroupData> groups) {
+    this.groups = groups;
   }
 
   public int getId() {
@@ -174,7 +182,6 @@ public class ContactData {
             ", firstmail='" + firstmail + '\'' +
             ", secondmail='" + secondmail + '\'' +
             ", thirdmail='" + thirdmail + '\'' +
-            ", group='" + group + '\'' +
             '}';
   }
 
@@ -225,10 +232,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
 
   public ContactData withId(int id) {
     this.id = id;
@@ -257,5 +260,10 @@ public class ContactData {
   public int hashCode() {
 
     return Objects.hash(id, firstname, middlename, lastname, homephone, mobilephone, workphone, firstmail, secondmail, thirdmail);
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
   }
 }
