@@ -25,14 +25,12 @@ public class GroupData {
   @Column (name = "group_name")
   private String name;
 
-  @ManyToMany(mappedBy = "groups")
+  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")
   private Set<ContactData> contacts = new HashSet<ContactData>();
 
     public Contacts getContacts() {
         return new Contacts(contacts);
     }
-
-
 
     @Override
     public boolean equals(Object o) {

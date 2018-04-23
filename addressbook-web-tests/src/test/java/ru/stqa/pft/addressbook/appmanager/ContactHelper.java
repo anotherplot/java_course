@@ -194,4 +194,28 @@ public class ContactHelper extends HelperBase {
         click(By.partialLinkText("group page"));
         return chosenGroup;
     }
+
+
+    public void contactDetailsById(int id){
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(6).findElement(By.tagName("a")).click();
+    }
+
+    public GroupData deleteContactFromGroup(ContactData contact, GroupData group){
+        contactDetailsById(contact.getId());
+        openContactsGroup(group);
+        selectContactById(contact.getId());
+        click(By.name("remove"));
+        click(By.partialLinkText("group page"));
+        System.out.println("after helper groups"+contact.getGroups());
+        return group;
+    }
+
+    private void openContactsGroup(GroupData group) {
+        click(By.xpath("//a[contains(@href,'group=" + group.getId() + "')]"));
+
+    }
+
 }
