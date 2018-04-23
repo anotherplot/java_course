@@ -8,6 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -170,8 +171,27 @@ public class ContactHelper extends HelperBase {
     }
 
     public void addGroupTo(ContactData contact, GroupData group) {
-        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(group.getId()));
         click(By.name("add"));
 
+    }
+
+
+    public GroupData addGroupToContact(ContactData choosenContact, Groups contactGroupsBefore, Groups groups, GroupData chosenGroup) {
+
+        if (contactGroupsBefore.size() != 0 && contactGroupsBefore.iterator().next().getId() == chosenGroup.getId())
+            for (GroupData existingGroup : groups) {
+                if (! contactGroupsBefore.contains(existingGroup)) {
+                    chosenGroup = existingGroup;
+                    System.out.println("selected " +chosenGroup);
+                    break;
+                }
+
+            }
+        selectContactById(choosenContact.getId());
+        choosenContact.inGroup(chosenGroup);
+        addGroupTo(choosenContact, chosenGroup);
+        click(By.partialLinkText("group page"));
+        return chosenGroup;
     }
 }

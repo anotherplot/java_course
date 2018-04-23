@@ -13,19 +13,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
-public class AddContactToGroup extends TestBase{
+public class AddContactToGroupTest extends TestBase{
 
 
     @BeforeMethod
     public void ensurePreconditions() {
-       ContactData contact = app.db().contacts().iterator().next();
-       Groups contactGroups = contact.getGroups();
-
-     if(contactGroups.size() == app.db().groups().size() || app.db().groups().size() == 0){
-
-            app.goTo().groupPage();
-            app.group().create(new GroupData().withName("test1"));
-        }
 
         if (app.db().contacts().size() == 0) {
             File photo = new File("src/test/resources/photo.png");
@@ -35,6 +27,16 @@ public class AddContactToGroup extends TestBase{
 
         }
 
+       ContactData contact = app.db().contacts().iterator().next();
+       Groups contactGroups = contact.getGroups();
+
+     if(contactGroups.size() == app.db().groups().size() || app.db().groups().size() == 0){
+
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("test1"));
+        }
+
+
 
     }
 
@@ -43,31 +45,18 @@ public class AddContactToGroup extends TestBase{
 
         ContactData choosenContact = app.db().contacts().iterator().next();
         Groups contactGroupsBefore = choosenContact.getGroups();
-
         Groups groups = app.db().groups();
         GroupData chosenGroup = groups.iterator().next();
-
-        if (contactGroupsBefore.size() != 0 && contactGroupsBefore.iterator().next().getId() == chosenGroup.getId())
-            for (GroupData existingGroup : groups) {
-                    if (! contactGroupsBefore.contains(existingGroup)) {
-                        chosenGroup = existingGroup;
-                        System.out.println("found another free group"+existingGroup);
-                        break;
-                    }
-
-                }
-
-        System.out.println("chosen another free group"+chosenGroup);
-
         app.goTo().homePage();
-        app.contact().selectContactById(choosenContact.getId());
-        choosenContact.inGroup(chosenGroup);
-        app.contact().addGroupTo(choosenContact, chosenGroup);
+
+        chosenGroup = app.contact().addGroupToContact(choosenContact, contactGroupsBefore, groups, chosenGroup);
+
         Groups contactGroupsAfter = choosenContact.getGroups();
         assertThat(contactGroupsBefore.size()+1, equalTo(contactGroupsAfter.size()));
         assertTrue(contactGroupsAfter.contains(chosenGroup));
 
     }
+
 
 
 }
