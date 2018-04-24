@@ -170,7 +170,7 @@ public class ContactHelper extends HelperBase {
                 .withAddress(address);
     }
 
-    public void addGroupTo(ContactData contact, GroupData group) {
+    public void addToGroup(GroupData group) {
         new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(group.getId()));
         click(By.name("add"));
 
@@ -190,32 +190,26 @@ public class ContactHelper extends HelperBase {
             }
         selectContactById(choosenContact.getId());
         choosenContact.inGroup(chosenGroup);
-        addGroupTo(choosenContact, chosenGroup);
+        addToGroup(chosenGroup);
         click(By.partialLinkText("group page"));
         return chosenGroup;
     }
 
+    public void deleteContactFromGroup(ContactData contact, GroupData group){
 
-    public void contactDetailsById(int id){
-        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
-        WebElement row = checkbox.findElement(By.xpath("./../.."));
-        List<WebElement> cells = row.findElements(By.tagName("td"));
-        cells.get(6).findElement(By.tagName("a")).click();
+        removeFromGroup(contact, group);
+        click(By.partialLinkText("group page"));
+        contact.removedGromGroup(group);
+        click(By.partialLinkText("group page"));
+
     }
 
-    public GroupData deleteContactFromGroup(ContactData contact, GroupData group){
-        contactDetailsById(contact.getId());
-        openContactsGroup(group);
+    public void removeFromGroup(ContactData contact, GroupData group) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(Integer.toString(group.getId()));
         selectContactById(contact.getId());
         click(By.name("remove"));
-        click(By.partialLinkText("group page"));
-        System.out.println("after helper groups"+contact.getGroups());
-        return group;
-    }
-
-    private void openContactsGroup(GroupData group) {
-        click(By.xpath("//a[contains(@href,'group=" + group.getId() + "')]"));
 
     }
+
 
 }

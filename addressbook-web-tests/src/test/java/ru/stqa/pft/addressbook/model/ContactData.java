@@ -266,4 +266,9 @@ public class ContactData {
     groups.add(group);
     return this;
   }
+
+  public ContactData removedGromGroup(GroupData group) {
+    groups.remove(group);
+    return this;
+  }
 }

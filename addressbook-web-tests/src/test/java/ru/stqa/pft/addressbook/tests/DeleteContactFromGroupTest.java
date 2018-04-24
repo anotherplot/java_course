@@ -53,20 +53,15 @@ public class DeleteContactFromGroupTest extends TestBase{
         Groups contactGroupsBefore = choosenContact.getGroups();
         GroupData deletedGroup = choosenContact.getGroups().iterator().next();
         System.out.println("choosen contact"+choosenContact);
+        System.out.println("choosen group"+deletedGroup);
 
         app.goTo().homePage();
-
-        GroupData gr = app.contact().deleteContactFromGroup(choosenContact,deletedGroup);
-        System.out.println("choosen contact"+choosenContact);
-
-        System.out.println("choosen gr"+gr.getContacts());
-        /*Thread.sleep(1000);
+        app.contact().deleteContactFromGroup(choosenContact,deletedGroup);
         Groups contactGroupsAfter = choosenContact.getGroups();
+        assertThat(contactGroupsBefore.size(), equalTo(contactGroupsAfter.size()+1));
+        assertFalse(contactGroupsAfter.contains(deletedGroup));
 
-        System.out.println("size before"+contactGroupsBefore.size());
-        System.out.println("size after"+contactGroupsAfter.size());
-        assertThat(contactGroupsBefore.size()-1, equalTo(contactGroupsAfter.size()));
-*/
+
 
     }
 
