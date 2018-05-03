@@ -34,12 +34,11 @@ public class RegistrationHelper extends HelperBase{
 
     }
 
-    public void manageUser(UserData user) {
+    public void resetPassword(UserData user) {
         click(By.xpath("//a[contains(@href,'manage_overview')]"));
         click(By.xpath("//a[contains(@href,'manage_user_page')]"));
         click(By.xpath("//a[contains(@href,'user_id="+user.getId()+"')]"));
-
-
+        click(By.cssSelector("input[value = 'Reset Password']"));
 
     }
 }
