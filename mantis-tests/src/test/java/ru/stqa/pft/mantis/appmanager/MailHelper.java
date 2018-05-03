@@ -54,7 +54,7 @@ public List<MailMessage> waitForMail(int count, long timeout) throws MessagingEx
 
 
     public void start(){
-        wiser.setPort(2626);
+        wiser.setPort(1025);
         wiser.start();
     }
     public void stop(){
