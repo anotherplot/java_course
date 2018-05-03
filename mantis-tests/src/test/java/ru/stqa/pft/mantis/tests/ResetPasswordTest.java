@@ -28,8 +28,9 @@ public class ResetPasswordTest extends TestBase {
         Users userlist = app.db().users();
         UserData chosenUser = userlist.iterator().next();
         app.registration().logIn(app.getProperty("web.adminLogin"), app.getProperty("web.adminPassword"));
+        System.out.println("user id = "+chosenUser.getId());
         app.registration().resetPassword(chosenUser);
-        List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+        List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
         String confirmationLink = findConfirmationLink(mailMessages, chosenUser.getEmail());
         app.registration().finish(confirmationLink,newPassword);
         AssertJUnit.assertTrue(app.newSession().login(chosenUser.getUsername(), newPassword));
@@ -38,7 +39,6 @@ public class ResetPasswordTest extends TestBase {
 
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
         MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-        System.out.println(mailMessage);
         VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
         return regex.getText(mailMessage.text);
     }
