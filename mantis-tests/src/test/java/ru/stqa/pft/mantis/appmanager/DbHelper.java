@@ -13,32 +13,22 @@ import java.util.List;
 
 public class DbHelper {
 
-    //private final ApplicationManager app;
+    private final ApplicationManager app;
     private final SessionFactory sessionFactory;
 
 
-    public DbHelper() {
+    public DbHelper(ApplicationManager app) {
+        this.app=app;
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
             sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
         }
 
-
- /*   public Contacts contacts() {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'" ).list();
-        session.getTransaction().commit();
-        session.close();
-        return new Contacts(result);
-
-    }
-    */
  public Users users() {
      Session session = sessionFactory.openSession();
      session.beginTransaction();
-     List<UserData> result = session.createQuery( "from UserData" ).list();
+     List<UserData> result = session.createQuery( "from UserData where enabled=1 and id<>1" ).list();
      session.getTransaction().commit();
      session.close();
      return new Users(result);
