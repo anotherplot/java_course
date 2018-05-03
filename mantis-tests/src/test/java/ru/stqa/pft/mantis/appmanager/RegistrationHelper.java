@@ -1,6 +1,7 @@
 package ru.stqa.pft.mantis.appmanager;
 
 import org.openqa.selenium.By;
+import ru.stqa.pft.mantis.model.UserData;
 
 public class RegistrationHelper extends HelperBase{
 
@@ -33,9 +34,11 @@ public class RegistrationHelper extends HelperBase{
 
     }
 
-    public void manageUser() {
+    public void manageUser(UserData user) {
         click(By.xpath("//a[contains(@href,'manage_overview')]"));
         click(By.xpath("//a[contains(@href,'manage_user_page')]"));
+        click(By.xpath("//a[contains(@href,'user_id="+user.getId()+"')]"));
+
 
 
     }
