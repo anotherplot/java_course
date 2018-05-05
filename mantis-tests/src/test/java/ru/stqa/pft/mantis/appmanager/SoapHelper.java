@@ -4,6 +4,7 @@ import biz.futureware.mantis.rpc.soap.client.*;
 import org.testng.annotations.Test;
 import ru.stqa.pft.mantis.model.Issue;
 import ru.stqa.pft.mantis.model.Project;
+import ru.stqa.pft.mantis.tests.TestBase;
 
 import javax.xml.rpc.ServiceException;
 import java.math.BigInteger;
@@ -14,7 +15,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class SoapHelper {
+public class SoapHelper extends TestBase{
 
     private ApplicationManager app;
 
@@ -30,10 +31,7 @@ public class SoapHelper {
                 .collect(Collectors.toSet());
     }
 
-    private MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
-        return new MantisConnectLocator()
-                    .getMantisConnectPort(new URL("http://localhost/mantisbt-2.14.0/api/soap/mantisconnect.php"));
-    }
+
 
 
     public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
@@ -46,10 +44,12 @@ public class SoapHelper {
         issueData.setCategory(categories[0]);
         BigInteger issueId =  mc.mc_issue_add("administrator","root", issueData);
         IssueData createdIssueData = mc.mc_issue_get("administrator", "root", issueId);
+
         return new Issue().withId(createdIssueData.getId().intValue())
                 .withSummary(createdIssueData.getSummary()).withDescription(createdIssueData.getDescription())
                 .withProject(new Project().withId(createdIssueData.getProject().getId().intValue())
                 .withName(createdIssueData.getProject().getName()));
 
     }
+
 }
