@@ -1,7 +1,5 @@
 package ru.stqa.pft.sandbox;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-
 public class Equation {
 
   private double a;
