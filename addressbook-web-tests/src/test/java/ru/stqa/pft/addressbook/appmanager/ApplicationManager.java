@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -51,9 +52,16 @@ public class ApplicationManager {
         wd = new InternetExplorerDriver();
       }
     } else {
+
       DesiredCapabilities capabilities = new DesiredCapabilities();
-      capabilities.setBrowserName("CHROME");
-      wd = new RemoteWebDriver(new URL("http://188.32.167.111:4444/wd/hub"), capabilities);
+      capabilities.setBrowserName(browser);
+
+      DesiredCapabilities caps = DesiredCapabilities.chrome();
+      ChromeOptions options = new ChromeOptions();
+      options.addArguments("disable-infobars");
+      caps.setCapability(ChromeOptions.CAPABILITY, options);
+
+      wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), options);
 
     }
 
